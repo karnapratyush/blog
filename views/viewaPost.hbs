@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="user">{{user.username}}</div>
+    <h1>{{singlePost.postTitle}}</h1>
+    <div class="date">{{singlePost.createdAt}}</div>
+    <p>
+        {{singlePost.postBody}}
+    </p>
+    <form action="/addComment/{{userId}}/{{postId}}" method="POST">
+        <label for="comment">Write a comment</label>
+    <input type="text" id="comment" name="comment" required>
+    <button type="submit">Add Comment</button>
+
+    </form>
+
+    {{#each allComments as |ac|}}
+
+        <p class="comment">{{ac.comment}}</p>
+        <div class="date">{{ac.createdAt}}</div>
+        <div class="writer">{{ac.userName}}</div>
+    {{/each}}
+</body>
+</html>

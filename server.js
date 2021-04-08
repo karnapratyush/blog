@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const session = require('express-session');
 const {registerRoute}=require('./routes/register')
 const {loginRoute}=require('./routes/login')
 const {homeRoute}=require('./routes/homeRoute')
@@ -8,6 +9,7 @@ const { commentRoute }=require('./routes/comment');
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.set('view engine','hbs')
+app.use('/public', express.static(__dirname + '/public'));
 
 const { connectDB } = require('./db/db');
 connectDB();

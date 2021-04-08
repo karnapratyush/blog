@@ -1,11 +1,13 @@
 const loginRoute=require('express').Router()
-
+const session = require('express-session');
 const {verifyUser}=require('../controllers/loginVerify')
 
 msg=""
 
 
 loginRoute.get('/',(req,res)=>{
+    
+    console.log(req.session.userId);
     res.render('login',{msg})
 })
 

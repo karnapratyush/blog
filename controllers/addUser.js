@@ -13,7 +13,7 @@ async function addUser(username,email,password)
             password
         })
          await newUser.save();
-         return 1;
+         return newUser;
 }
 
 module.exports={addUser}

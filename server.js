@@ -7,7 +7,7 @@ const {homeRoute}=require('./routes/homeRoute')
 const { postsRoute }=require('./routes/postsRoute');
 const { commentRoute }=require('./routes/comment');
 const cookieParser = require('cookie-parser');
-
+const PORT = process.env.PORT || 4444;
 
 app.use(cookieParser());
 app.use(express.json())
@@ -39,6 +39,6 @@ app.get('/logout',(req,res)=>{
 
 
 
-app.listen('5555',()=>{
-    console.log("http://localhost:5555")
+app.listen(PORT,()=>{
+    console.log(`http://localhost:${PORT}`)
 })

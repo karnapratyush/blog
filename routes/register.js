@@ -16,7 +16,7 @@ registerRoute.get('/', clearMsg,(req, res) => {
 	
 });
 
-registerRoute.post('/register', async (req, res) => {
+registerRoute.post('/', async (req, res) => {
 
 	firstName = req.body.firstName;
 	lastName=req.body.lastName;
@@ -29,14 +29,14 @@ registerRoute.post('/register', async (req, res) => {
 	let user = await registerModel.findOne({ email: email });
 	if (confirmPassword!=password)
 	{	message="Password doesnot match"
-		res.redirect('/');
+		res.redirect('/register');
 	}
 
 	
 	else if (user)
 	{
 		message = "emailId already exist. Please try new emailId or login";
-		res.redirect('/');
+		res.redirect('/register');
 	}
 	else
 	{
@@ -49,7 +49,7 @@ registerRoute.post('/register', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		
-		res.redirect('/')
+		res.redirect('/register')
 	}
 }
 });

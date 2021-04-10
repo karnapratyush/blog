@@ -20,9 +20,9 @@ app.use('/public', express.static(__dirname + '/public'));
 const { connectDB } = require('./db/db');
 connectDB();
 
-app.use('/home/',homeRoute)
+app.use('/',homeRoute)
 
-app.use('/',registerRoute)
+app.use('/register',registerRoute)
 app.use('/login',loginRoute)
 
 app.use('/posts',postsRoute)

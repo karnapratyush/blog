@@ -38,7 +38,7 @@ loginRoute.post('/',async(req,res)=>{
         store.userName=out.firstName+' '+out.lastName;
         res.cookie('userData',store)
         
-        res.redirect(`/home/`)
+        res.redirect(`/`)
     }
 
 })

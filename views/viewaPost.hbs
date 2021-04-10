@@ -11,7 +11,6 @@
     <a href="/logout">Logout</a>
     <h1>{{singlePost.postTitle}}</h1>
     <h2>written by: {{singlePost.userName}}</h2>
-    <div class="date">{{singlePost.createdAt}}</div>
     <p>
         {{singlePost.postBody}}
     </p>
@@ -25,7 +24,6 @@
     {{#each allComments as |ac|}}
 
         <p class="comment">{{ac.comment}}</p>
-        <div class="date">{{ac.createdAt}}</div>
         <div class="writer">{{ac.userName}}</div>
     {{/each}}
 </body>

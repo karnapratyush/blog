@@ -40,7 +40,7 @@ postsRoute.post('/',async(req,res)=>{
     // console.log(title,userId,postBody)
     await addPost(title, postBody, userId,userDetails.userName);
     
-    res.redirect(`/home`)
+    res.redirect(`/`)
 
 })
 postsRoute.get('/:postID',async(req,res)=>{

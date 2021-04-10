@@ -1,4 +1,5 @@
 const { registerModel } = require('../models/register');
+const bcrypt=require('bcrypt')
 
 async function verifyUser(email,password)
 {
@@ -6,7 +7,7 @@ async function verifyUser(email,password)
     if (!user)
     return "Email not found";
     else {
-        if (password==user.password)
+        if (await bcrypt.compare(password, user.password)) 
         return user;
     }
     return "password Incorrect";

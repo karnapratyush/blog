@@ -12,7 +12,8 @@
     <nav class="navbar navbar-light  " style="background-color: #aff1d7;">
    
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1 ms-auto">Welcome, {{userName.username}}</span>
+    <span class="navbar-brand mb-0 h1 ms-auto">Welcome, {{userName}}</span>
+    <a href="/logout">Logout</a>
   </div>
 </nav>
 <br>
@@ -20,7 +21,7 @@
     
 
 
-    <a class="btn btn-primary btn-lg" href="/posts/{{userName._id}}" type="button">ADD NEW POST</a>
+    <a class="btn btn-primary btn-lg" href="/posts" type="button">ADD NEW POST</a>
 
     
     
@@ -32,7 +33,8 @@
   <div>
     <h5 class="mt-0">{{a.postTitle}}</h5>
     {{a.createdAt}}
-     <a href="/posts/{{userName._id}}">Read More........</a>
+    written by {{a.userName}}
+     <a href="/posts/{{a._id}}">Read More........</a>
   </div>
 </div>
 

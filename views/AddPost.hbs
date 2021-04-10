@@ -7,19 +7,20 @@
     <title>Document</title>
 </head>
 <body>
+  <div>welcome, {{userName}}</div>
+  <a href="/logout">Logout</a>
     ADD Posts
-    <form action={{user.ref}} method="POST">
+    <form action="/posts/" method="POST">
     <div>
     <label for="Title">Title</label>
     <input type="text" id="title" name="title" required>
   </div>
   <div>
     <label for="blogBody">Write Post</label>
-    <input type="text" id="blogBody" name="blogBody" required>
+    <textarea type="text" id="blogBody" name="blogBody" required></textarea>
   </div>
   <div>
     <label for="blogId">USER ID</label>
-    <input type="text" id="blogId" name="blogId" placeholder={{user._id}} readonly>
   </div>
   
   <button type="submit">ADD POST</button>

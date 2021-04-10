@@ -4,50 +4,67 @@ const {viewPost}=require('../controllers/viewPost')
 const { registerModel } = require('../models/register');
 const mongoose=require('mongoose');
 const {viewComment}=require('../controllers/viewComment')
+const cookieParser = require('cookie-parser');
 
+postsRoute.use(cookieParser());
 
-
-postsRoute.get('/:id',async(req,res)=>{
-    id=req.params.id
+postsRoute.get('/',async(req,res)=>{
+    userDetails = req.cookies.userData;
+	if (!userDetails) {
+		res.redirect('/login');
+	}
+    
+	userName = userDetails.userName;
+    id=userDetails.id
     // console.log(id)
-    let user = await registerModel.findOne({_id:id });
+    // let user = await registerModel.findOne({_id:id });
     // console.log(user)
-    user.ref=`/posts/${user._id}`
+    // user.ref=`/posts/${user._id}`
     
     
 
 
-    res.render('AddPost',{user})
+    res.render('AddPost',{userName})
 })
 
-postsRoute.post('/:id',async(req,res)=>{
-    // console.log(req.params.id)
+postsRoute.post('/',async(req,res)=>{
+
+    userDetails = req.cookies.userData;
+	if (!userDetails) {
+		res.redirect('/login');
+	}
+    
     title=req.body.title;
-    userId=req.params.id;
-    userId = mongoose.Types.ObjectId(userId);
+    userId = mongoose.Types.ObjectId(userDetails.id);
     postBody=req.body.blogBody;
     // console.log(title,userId,postBody)
-    await addPost(title, postBody, userId);
+    await addPost(title, postBody, userId,userDetails.userName);
     
-    res.redirect(`/home/${userId}`)
+    res.redirect(`/home`)
 
 })
-postsRoute.get('/:id/:postID',async(req,res)=>{
-    console.log(req.params)
-    singlePost= await viewPost(req.params.postID)
-    let user = await registerModel.findOne({ _id: req.params.id });
-    // let allComments=await viewComment(req.params.postID)
-    let userId=req.params.id;
-    let postId=req.params.postID
-    let allComments=await  viewComment(postId)
-    console.log(allComments[0].userId)
-    for (let i =0;i<allComments.length;i++)
+postsRoute.get('/:postID',async(req,res)=>{
+
+    userDetails = req.cookies.userData;
+	if (!userDetails) {
+		res.redirect('/login');
+	}
+    let postId = req.params.postID;
+    // console.log(req.params)
+    singlePost= await viewPost(postId)
+    if (!singlePost)
     {
-        let user=await registerModel.findOne({_id:allComments[i].userId})
-        console.log(user)
-        allComments[i].userName=user.username
+        res.send('Cannot find Post')
     }
-    res.render('viewaPost',{singlePost,user,userId,postId,allComments})
+    userName=userDetails.userName
+    
+    
+    
+    
+    let allComments=await viewComment(postId)
+    
+    
+    res.render('viewaPost',{singlePost,userName,postId,allComments})
 })
 
 module.exports={postsRoute};

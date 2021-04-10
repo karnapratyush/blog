@@ -1,8 +1,9 @@
 const { commentModel }=require('../models/comments')
 
-async function addComment(userId, comment, postId) {
+async function addComment(userId, comment, postId,userName) {
 	const newPost = new commentModel({
 		userId,
+		userName,
         comment,
         postId
 	});

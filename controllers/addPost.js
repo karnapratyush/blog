@@ -1,11 +1,12 @@
 const { postModel } = require('../models/posts');
 
-async function addPost(postTitle,postBody,userId) {
+async function addPost(postTitle,postBody,userId,userName) {
 	
 	const newPost = new postModel({
 		postTitle,
 		postBody,
-        userId
+        userId,
+		userName
 		
 	});
 	await newPost.save();

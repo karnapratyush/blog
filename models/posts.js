@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //  defining schema
-postTitle= { type: String, required: true }
-postBody= { type: String, required: true }
-userId= { type: Schema.ObjectId, required: true }
+postTitle= { type: String, required: true };
+postBody= { type: String, required: true };
+userId= { type: Schema.ObjectId, required: true };
+userName = { type: String, required: true };
 
 
 const postSchema = new Schema(
@@ -13,6 +14,7 @@ const postSchema = new Schema(
 		postTitle,
 		postBody,
 		userId,
+		userName
 
 		
 		

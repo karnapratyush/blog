@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema(
 	{
 		userId: { type: Schema.ObjectId, required: true },
+		userName:{ type: String, required: true },
 		comment: { type: String, required: true },
 		postId: { type: Schema.ObjectId, required: true }
 	},

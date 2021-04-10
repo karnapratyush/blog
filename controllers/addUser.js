@@ -1,6 +1,6 @@
 const {registerModel}=require('../models/register')
 
-async function addUser(username,email,password)
+async function addUser(firstName,lastName,email,password)
 {
     const userExist=await registerModel.findOne({email:email})
     if(userExist)
@@ -8,7 +8,8 @@ async function addUser(username,email,password)
         return 0;
     }
      const newUser= new registerModel({
-            username,
+            firstName,
+            lastName,
             email,
             password
         })

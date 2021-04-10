@@ -7,13 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="user">{{user.username}}</div>
+    <div class="user">{{userName}}</div><br>
+    <a href="/logout">Logout</a>
     <h1>{{singlePost.postTitle}}</h1>
+    <h2>written by: {{singlePost.userName}}</h2>
     <div class="date">{{singlePost.createdAt}}</div>
     <p>
         {{singlePost.postBody}}
     </p>
-    <form action="/addComment/{{userId}}/{{postId}}" method="POST">
+    <form action="/addComment/{{postId}}" method="POST">
         <label for="comment">Write a comment</label>
     <input type="text" id="comment" name="comment" required>
     <button type="submit">Add Comment</button>

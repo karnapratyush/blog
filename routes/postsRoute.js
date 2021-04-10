@@ -1,7 +1,6 @@
 const postsRoute=require('express').Router()
 const {addPost}=require('../controllers/addPost')
 const {viewPost}=require('../controllers/viewPost')
-const { registerModel } = require('../models/register');
 const mongoose=require('mongoose');
 const {viewComment}=require('../controllers/viewComment')
 const cookieParser = require('cookie-parser');
@@ -28,6 +27,7 @@ postsRoute.get('/',async(req,res)=>{
 })
 
 postsRoute.post('/',async(req,res)=>{
+    // console.log(req.body)
 
     userDetails = req.cookies.userData;
 	if (!userDetails) {
@@ -35,7 +35,10 @@ postsRoute.post('/',async(req,res)=>{
 	}
     
     title=req.body.title;
-    userId = mongoose.Types.ObjectId(userDetails.id);
+    
+    userId = mongoose.Types.ObjectId(userDetails.id)
+    // console.log("userID:",userId);
+   
     postBody=req.body.blogBody;
     // console.log(title,userId,postBody)
     await addPost(title, postBody, userId,userDetails.userName);
@@ -51,7 +54,9 @@ postsRoute.get('/:postID',async(req,res)=>{
 	}
     let postId = req.params.postID;
     // console.log(req.params)
+    try{
     singlePost= await viewPost(postId)
+
     if (!singlePost)
     {
         res.send('Cannot find Post')
@@ -64,7 +69,12 @@ postsRoute.get('/:postID',async(req,res)=>{
     let allComments=await viewComment(postId)
     
     
-    res.render('viewaPost',{singlePost,userName,postId,allComments})
+    res.render('viewaPost',{singlePost,userName,postId,allComments})}
+    catch(err)
+    {
+        console.log(err)
+        res.redirect('/')
+    }
 })
 
 module.exports={postsRoute};

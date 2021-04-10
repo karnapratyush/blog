@@ -9,7 +9,7 @@ function clearMsg(req, res,next)
 	next();
 	message=""
 }
-console.log("message:",message)
+// console.log("message:",message)
 registerRoute.get('/', clearMsg,(req, res) => {
 	console.log('message:', message);
 	res.render('register',{message});
@@ -23,8 +23,8 @@ registerRoute.post('/', async (req, res) => {
 	email = req.body.email;
 	password = req.body.password;
 	confirmPassword=req.body.confirmPassword;
-	console.log(password)
-	console.log(confirmPassword)
+	// console.log(password)
+	// console.log(confirmPassword)
 
 	let user = await registerModel.findOne({ email: email });
 	if (confirmPassword!=password)

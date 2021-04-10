@@ -4,27 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/blog.css">
 </head>
 <body>
-    <div class="user">{{userName}}</div><br>
+    <nav class="navbar navbar-light  " style="background-color: #aff1d7;">
+   
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 ms-auto">Welcome, {{userName}}</span>
     <a href="/logout">Logout</a>
+  </div>
+</nav>
+ <div class="row">
+  <div class="leftcolumn">
     <h1>{{singlePost.postTitle}}</h1>
-    <h2>written by: {{singlePost.userName}}</h2>
+    <h6>written by: {{singlePost.userName}}</h6>
     <p>
         {{singlePost.postBody}}
     </p>
+    </div>
+    </div>
+    <br>
+    <br>
+     <div class="row">
+  <div class="leftcolumn">
     <form action="/addComment/{{postId}}" method="POST">
         <label for="comment">Write a comment</label>
-    <input type="text" id="comment" name="comment" required>
+        <br>
+    <textarea  rows="4" cols="100" type="text" id="comment" name="comment" required></textarea>
+    <br>
     <button type="submit">Add Comment</button>
 
     </form>
-
+   
+    
+   
+    <br>
+    <br>
+    <h3>COMMENTS</h3>
     {{#each allComments as |ac|}}
+     <div class="card">
 
         <p class="comment">{{ac.comment}}</p>
-        <div class="writer">{{ac.userName}}</div>
+        <h6 class="writer">written by:{{ac.userName}}</h6>
+    </div>
     {{/each}}
+</div>
+</div>
+
 </body>
 </html>
